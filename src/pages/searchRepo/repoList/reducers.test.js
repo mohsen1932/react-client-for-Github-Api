@@ -8,6 +8,8 @@ const initial = {
   message: "",
   loading: false,
   total_count: 0,
+  next_page: 0,
+  more_items_in_collection: true
 };
 describe("Repolist reducers", () => {
   test("should return the initial state", () => {
@@ -53,5 +55,24 @@ describe("Repolist reducers", () => {
         { type: constants.SET_TOTAL_COUNT, payload: { total_count: 5000 } }
       )
     ).toEqual({ total_count: 5000 });
+  });
+  test(`should handel ${constants.SET_MORE_ITEMS_IN_COLLECTON}`, () => {
+    expect(
+      reducers(
+        {},
+        {
+          type: constants.SET_MORE_ITEMS_IN_COLLECTON,
+          payload: { more_items_in_collection: 1024 }
+        }
+      )
+    ).toEqual({ more_items_in_collection: 1024 });
+  });
+  test(`should handel ${constants.SET_NEXT_PAGE}`, () => {
+    expect(
+      reducers(
+        {},
+        { type: constants.SET_NEXT_PAGE, payload: { next_page: 10 } }
+      )
+    ).toEqual({ next_page: 10 });
   });
 });

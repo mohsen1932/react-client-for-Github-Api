@@ -13,20 +13,43 @@ export class RepoList extends Component {
   state = {
     topics: ""
   };
+  componentDidMount() {
+        document.addEventListener("scroll", this.handleOnScroll);
+  }
   componentWillUnmount() {
-    const { set } = this.props;
+    const { set, setMoreItemsInCollection, setNextPage } = this.props;
     set([]);
+    setMoreItemsInCollection(true);
+    setNextPage(0);
     this.setState({
       topics: ""
     });
+    document.removeEventListener("scroll", this.handleOnScroll);
   }
   handleLoadMore = () => {
-    const { loading, get } = this.props;
+    const { loading, get, next_page, more_items_in_collection } = this.props;
     const { topics } = this.state;
-    if (!loading ) {
-      get(topics, 1);
+    if (!loading && more_items_in_collection) {
+      get(topics,next_page);
     }
   };
+  handleOnScroll = () => {
+        const footer = document.querySelector(".footer");
+        if (typeof footer !== "undefined" && footer !== null) {
+            const footerHeight = footer.offsetHeight + 25;
+            const scrollTop =
+                (document.documentElement && document.documentElement.scrollTop) ||
+                document.body.scrollTop;
+            const scrollHeight =
+                (document.documentElement && document.documentElement.scrollHeight) ||
+                document.body.scrollHeight;
+            const clientHeight =
+                document.documentElement.clientHeight || window.innerHeight;
+            const scrolledToBottom =
+                Math.ceil(scrollTop + clientHeight + footerHeight) >= scrollHeight;
+            if (scrolledToBottom) this.handleLoadMore();
+        }
+    };
   handleSearch = keyword => {
     const { get } = this.props;
     const topics = TopicsGenerator(keyword);
@@ -108,12 +131,14 @@ const mapStateToProps = state => ({
   failure: state.repoList.failure,
   message: state.repoList.message,
   data: state.repoList.data,
-  total_count: state.repoList.total_count
+  total_count: state.repoList.total_count,
+  next_page: state.repoList.next_page,
+  more_items_in_collection: state.repoList.more_items_in_collection
 });
 const mapDispatchToProps = dispatch => {
-  const { get, set } = actions;
+  const { get, set, setMoreItemsInCollection, setNextPage } = actions;
   return bindActionCreators(
-    { get, set },
+    { get, set, setMoreItemsInCollection, setNextPage },
     dispatch
   );
 };
@@ -126,7 +151,9 @@ RepoList.propTypes = {
   more_items_in_collection: PropTypes.bool,
   total_count: PropTypes.number,
   get: PropTypes.func,
-  set: PropTypes.func
+  set: PropTypes.func,
+  setNextPage: PropTypes.func,
+  setMoreItemsInCollection: PropTypes.func
 };
 export default connect(
   mapStateToProps,

@@ -32,3 +32,15 @@ export const loading = loading => ({
     loading
   }
 });
+export const setMoreItemsInCollection = more_items_in_collection => ({
+  type: constants.SET_MORE_ITEMS_IN_COLLECTON,
+  payload: {
+    more_items_in_collection
+  }
+});
+export const setNextPage = next_page => ({
+  type: constants.SET_NEXT_PAGE,
+  payload: {
+    next_page
+  }
+});

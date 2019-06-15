@@ -51,4 +51,22 @@ describe("RepoList actions", () => {
     };
     expect(actions.setTotalCount(1056)).toEqual(expectedAction);
   });
+  test("should create an action to set more items in collection", () => {
+    const expectedAction = {
+      type: constants.SET_MORE_ITEMS_IN_COLLECTON,
+      payload: {
+        more_items_in_collection: false
+      }
+    };
+    expect(actions.setMoreItemsInCollection(false)).toEqual(expectedAction);
+  });
+  test("should create an action to next page", () => {
+    const expectedAction = {
+      type: constants.SET_NEXT_PAGE,
+      payload: {
+        next_page: 10
+      }
+    };
+    expect(actions.setNextPage(10)).toEqual(expectedAction);
+  });
 });

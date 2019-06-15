@@ -2,7 +2,6 @@ import { runSaga } from "redux-saga";
 import { getData, getRepoList } from "./sagas";
 import * as actions from "./actions";
 import * as services from "../../../utils/services";
-import * as config from "../../../utils/config";
 
 describe("getRepoList", () => {
   test("should give list of persons from state", () => {
@@ -67,6 +66,10 @@ describe("getData", () => {
       actions.setTotalCount(mockedData.total_count)
     );
     expect(dispatchedActions).toContainEqual(actions.set(mockedData.items));
+    expect(dispatchedActions).toContainEqual(
+          actions.setMoreItemsInCollection(true)
+      );
+    expect(dispatchedActions).toContainEqual(actions.setNextPage(2));
     expect(dispatchedActions).toContainEqual(actions.loading(false));
   });
 });
