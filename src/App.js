@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import SearchRepo from "./pages/searchRepo/searchRepo";
+import GlobalStyle from "./theme/injectGlobal";
 
 class App extends Component {
     render() {
         return (
             <>
+                <GlobalStyle />
                 <SearchRepo />
             </>
         );
