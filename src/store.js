@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
-import SearchRepo from "./pages/searchRepo/searchRepo";
+import SearchRepo from "./pages/searchRepo";
 import { all } from "redux-saga/effects";
 
 const rootSaga = function*() {

@@ -12,7 +12,9 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.2",
     "styled-components": "^4.2.0",
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "react-helmet": "^5.2.0",
+    "prop-types": "^15.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
