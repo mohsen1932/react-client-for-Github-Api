@@ -1,9 +1,13 @@
-import SearchRepo from "./searchRepo";
-import  reducers  from "./reducers";
-import sagas from "./sagas";
+import React from "react";
+import DefaultLayout from "../../layouts/defaultLayout";
+import RepoList from "./repoList/repoList";
 
-export default {
-    SearchRepo,
-    reducers,
-    sagas
+const SearchRepo = () => {
+    const title = "Search Github Repositories";
+    return (
+        <DefaultLayout title={title}>
+            <RepoList />
+        </DefaultLayout>
+    );
 };
+export default SearchRepo;

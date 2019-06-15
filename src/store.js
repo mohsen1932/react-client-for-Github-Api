@@ -1,16 +1,16 @@
 import { applyMiddleware, createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
-import SearchRepo from "./pages/searchRepo";
+import RepoList from "./pages/searchRepo/repoList";
 import { all } from "redux-saga/effects";
 
 const rootSaga = function*() {
-  yield all([...SearchRepo.sagas]);
+  yield all([...RepoList.sagas]);
 };
 const sagaMiddleware = createSagaMiddleware();
 const rootReducer = (state, action) => {
   return combineReducers({
-      searchRepo: SearchRepo.reducers
+      repoList: RepoList.reducers
   })(state, action);
 };
 const store = createStore(
